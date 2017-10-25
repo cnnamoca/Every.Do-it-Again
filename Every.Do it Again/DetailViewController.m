@@ -9,6 +9,8 @@
 #import "DetailViewController.h"
 
 @interface DetailViewController ()
+@property (weak, nonatomic) IBOutlet UILabel *titleLabel;
+@property (weak, nonatomic) IBOutlet UILabel *priorityLabel;
 
 @end
 
@@ -16,8 +18,11 @@
 
 - (void)configureView {
     // Update the user interface for the detail item.
-    if (self.detailItem) {
-        self.detailDescriptionLabel.text = self.detailItem.timestamp.description;
+    if (self.todoItem) {
+        self.detailDescriptionLabel.text = self.todoItem.todoDescription;
+        self.title = self.todoItem.todoTitle;
+        self.titleLabel.text = self.todoItem.todoTitle;
+        self.priorityLabel.text = self.todoItem.priorityNumber;
     }
 }
 
@@ -37,9 +42,9 @@
 
 #pragma mark - Managing the detail item
 
-- (void)setDetailItem:(Event *)newDetailItem {
-    if (_detailItem != newDetailItem) {
-        _detailItem = newDetailItem;
+- (void)setTodoItem:(Todo *)newTodoItem {
+    if (_todoItem != newTodoItem) {
+        _todoItem = newTodoItem;
         
         // Update the view.
         [self configureView];
